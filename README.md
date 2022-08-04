@@ -6,11 +6,18 @@ The format is designed for embedding within the stream of reading, so specifical
 
 It also supports URL parameters for pedagogically specific use cases.  To use an option when preparing the URL for students, add ? followed by parameters.  Multiple parameters can be given by joining them with &
 
-realistic=true       starts the simulation in the mode where luminosity is a function of mass
+realistic            starts the simulation in the mode where luminosity is a function of mass
+
 mass=NUMBER          specify a starting mass
+
 luminosity=NUMBER    specify a starting mass
-fixedMass=true       lock the mass
-fixedLuminosity=true lock the luminosity
+
+fixedMass            lock the mass
+
+fixedLuminosity      lock the luminosity
+
+hideHeader           hide the header (this does leave the information popup icon present in the upper right)
+
 
 For example, to have students explore the effect of mass alone on the stellar lifespan, provide the link:
   https://foothillastrosims.github.io/stellar-lifespan/index.html?fixedLuminosity
