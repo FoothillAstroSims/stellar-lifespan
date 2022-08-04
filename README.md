@@ -13,7 +13,7 @@ fixedMass=true       lock the mass
 fixedLuminosity=true lock the luminosity
 
 For example, to have students explore the effect of mass alone on the stellar lifespan, provide the link:
-  https://foothillastrosims.github.io/stellar-lifespan/index.html?fixedLuminosity=true
+  https://foothillastrosims.github.io/stellar-lifespan/index.html?fixedLuminosity
   
 To embed in a web page, use the following HTML:
   <p><iframe src="https://foothillastrosims.github.io/stellar-lifespan/index.html" width="100%" height="210px"></iframe></p>
