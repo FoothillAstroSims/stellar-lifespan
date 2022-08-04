@@ -16,4 +16,4 @@ For example, to have students explore the effect of mass alone on the stellar li
   https://foothillastrosims.github.io/stellar-lifespan/index.html?fixedLuminosity=true
   
 To embed in a web page, use the following HTML:
-  <p><iframe src="https://foothillastrosims.github.io/stellar-lifespan/index.html" width="100%" height="200px"></iframe></p>
+  <p><iframe src="https://foothillastrosims.github.io/stellar-lifespan/index.html" width="100%" height="210px"></iframe></p>
