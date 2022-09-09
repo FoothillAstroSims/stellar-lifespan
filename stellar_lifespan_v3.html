@@ -290,7 +290,7 @@
           if (realistic) {
               updateInputs(0, 0);
           }
-          updateDisplay();
+          resetPlayState();
       }
 
       function updateDisplay() {
@@ -506,14 +506,17 @@
               console.log('logL, minL, and quotient ', logL, minL, (logL / minL), (sunL - minDispl));
               var L = L0 - (sunL - minDispl) * (logL / minL) ;
           }
-          console.log('scaled display L: ', L);
+          //console.log('scaled display L: ', L);
           return L;
       }
       
       function updateFuel() {
-          timeElapsed += sunLifespan / (frm * sunPlayTime);
-          starG[0] = starG[0] - inputs[1] / (frm * sunPlayTime);
-          starG[1] = starG[1] - 1 / (frm * sunPlayTime);
+          deltaTime = sunLifespan / (frm * sunPlayTime);
+          console.log('delta Time: ', deltaTime);
+          timeElapsed += deltaTime;
+          console.log('star fuel use: ', inputs[1] / inputs[0] / (frm * sunPlayTime));
+          starG[0] = starG[0] - inputs[1] / inputs[0] / (frm * sunPlayTime);
+          starG[1] = starG[1] - 1 / 1 / (frm * sunPlayTime);
           if (starG[0] < 0) {
               starG[0] = 0;
           }
