@@ -11,21 +11,21 @@
             background-color: lightblue;
             text-align: left;
             float:left;
-            height:200px;
+            height:220px;
         }
         .outputs {
             display: inline-block;
             border: 2px outset black;
             background-color: lightblue;
             text-align: left;
-            height:200px;
+            height:220px;
             vertical-align: middle;
         }
         .visualization {
             display: inline-block;
             background-color: black;
             border: 2px outset black;
-            height:200px;
+            height:220px;
             color:white;
         }
         .upper-right {
@@ -61,25 +61,30 @@
                     <input type="text" id="stellarLuminosityDisplay" size="8" value="1" oninput="updateInputs(1,0)">  <br>
                     <input id="stellarLuminositySlider" type ="range" min="-4" max="5.2" step="0.001" value="Error" oninput="updateInputs(1,1)"> <br>
             
-                <div id="realisticLabel"> <input type="checkbox" id="realisticOnly" onclick="updateRealistic()"> Realistic only? </div> <br>
-        </div>
+                <div id="realisticLabel"> <input type="checkbox" id="realisticOnly" onclick="updateRealistic()"> Realistic stars </div> <br>
+            
+           <b>Main Sequence lifespan</b>
+            <input type="text" id="lifespanDisplay" size="20" value="Error" readonly="true"> years <br> 
+            
+            </div>
         
-        <div id="lifeDisplay" class="outputs">
+<!--        <div id="lifeDisplay" class="outputs">
             <p><b>Main Sequence lifespan</b></p>
             <input type="text" id="lifespanDisplay" size="20" value="Error" readonly="true"> years <br> 
             <p><b>Time elapsed</b></p>
             <input type="text" id="elapsedDisplay" size="20" value="Error" readonly="true"> years <br> 
         </div>
-        
+-->        
         <div id="starAnimation" class="visualization">
             <canvas id="starDisplay" height="200" width="400">
             </canvas>
         </div>
 
-        <div id="infoLink" class="upper-right" onclick="popupInfo()">
+<!--        <div id="infoLink" class="upper-right" onclick="popupInfo()">
             <h3  onmouseclick="popupInfo()">&#9432;</h3>
         </div>
-
+-->
+    
 </div>
 
     
@@ -236,13 +241,17 @@
           //stars.push(new Star(100, 100, 1, 1, 30, 'rgba(255,255,20,0.5)'));
 
           startStop = createButton('Play / Pause');
-          startStop.position(x+120,y+170);
+          startStop.position(x+120,y+190);
           startStop.mousePressed(changePlayState);
  
-          resetPlay = createButton('reset');
-          resetPlay.position(x+230,y+170);
+          resetPlay = createButton('Reset');
+          resetPlay.position(x+230,y+190);
           resetPlay.mousePressed(resetPlayState);
-           
+
+          infoButton = createButton('Info');
+          infoButton.position(x+350,y+190);
+          infoButton.mousePressed(popupInfo);
+          
           noLoop();
       }
       
@@ -312,7 +321,7 @@
           // update stellar lifespan and display
             stellarLifespan = inputs[0] / inputs[1] * sunLifespan;
             document.getElementById('lifespanDisplay').value = (stellarLifespan).toLocaleString(undefined, {minimumFractionDigits:0, maximumSignificantDigits: 2});
-            document.getElementById('elapsedDisplay').value = (timeElapsed).toLocaleString(undefined, {minimumFractionDigits:0, maximumSignificantDigits: 3});
+            //document.getElementById('elapsedDisplay').value = (timeElapsed).toLocaleString(undefined, {minimumFractionDigits:0, maximumSignificantDigits: 3});
           
           // update star display variables
           deltaY = 30 * Math.log10(inputs[0]);
@@ -345,7 +354,7 @@
       
       function popupInfo() {
           var infoOption;
-          if (confirm("This tool calculates the approximate main-sequence lifespan of a model star based on its mass and its luminosity.  Adjust these two properties using the sliders on the left.  \n \n   Use the Play / Pause button to act out the lifespan of this model star in comparison to the sun.  The Reset button will restart this animation without changing the mass and luminosity selected.  Use the \"Realistic only?\" checkbox on the left to examine realistic stars, whose main-sequence luminosity is determined by their mass.  \n \n  The Stellar Lifespan calculator is part of the Foothill College AstroSims project.  Click OK to open the AstroSims homepage in a new tab to see our other simulations, as well as our listing of more than 300 other Astronomy education simulations and visualizations from authors around the world. \n \n Open https://foothill.edu/astronomy/astrosims.html in a new tab?")) {
+          if (confirm("This tool calculates and visualizes the approximate main-sequence lifespan of a star based on its mass and its luminosity.  Adjust these two properties using the sliders on the left.  \n \n   Use the Play / Pause button to act out the lifespan of this model star in comparison to the sun.  The Reset button will restart this animation without changing the mass and luminosity selected.  Use the \"Realistic stars\" checkbox on the left to examine realistic stars, whose main-sequence luminosity is determined by their mass.  \n \n  The Stellar Lifespan calculator is part of the Foothill College AstroSims project.  Click OK to open the AstroSims homepage in a new tab to see our other simulations, as well as our listing of more than 300 other Astronomy education simulations and visualizations from authors around the world. \n \n Open https://foothill.edu/astronomy/astrosims.html in a new tab?")) {
               window.open("https://foothill.edu/astronomy/astrosims.html","_blank");
           }
       }
@@ -362,6 +371,7 @@
           starContext.fillText('Fuel: ' + (100*starG[0]).toFixed(0).toString(10) + '%', 60, 32);
           starContext.fillText('Fuel: ' + (100*starG[1]).toFixed(0).toString(10) + '%', 260, 32);
           //starContext.fillText("Fuel: ", 260, 32);
+          starContext.fillText((timeElapsed).toLocaleString(undefined, {minimumFractionDigits:0, maximumSignificantDigits: 3}) + ' years', 120, 180);
           
           // draw rectangle with slope matching 
           starContext.beginPath();
@@ -379,6 +389,8 @@
               }
               drawStar(starX[i],starY[i],starR[i],starC[i],starL[i]);
           }   
+          
+          
           
           // draw fuel gauges for model star and sun
           
